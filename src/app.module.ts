@@ -4,8 +4,9 @@ import { AppService } from './app.service';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
-import { RolesModule } from './roles/roles.module';
+
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { RolesModule } from './modules/roles';
 
 @Module({
   imports: [
