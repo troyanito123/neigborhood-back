@@ -6,8 +6,8 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
 
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { RolesModule } from './modules/roles';
-import { UsersModule } from './modules/users';
+import { RolesModule } from './modules/roles/roles.module';
+import { UsersModule } from './modules/users/users.module';
 
 @Module({
   imports: [

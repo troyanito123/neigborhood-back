@@ -15,6 +15,10 @@ export class RolesService {
     return this.roleRepository.save(newRole);
   }
   async findAll(): Promise<Role[]> {
-    return this.roleRepository.find();
+    return this.roleRepository.find({ relations: ['users'] });
+  }
+
+  findOne(roleId: number): Promise<Role> {
+    return this.roleRepository.findOneOrFail(roleId);
   }
 }

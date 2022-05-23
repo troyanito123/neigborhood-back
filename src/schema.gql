@@ -2,12 +2,14 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Role {
+type User {
   id: Int!
   createAt: DateTime!
   updateAt: DateTime!
+  email: String!
   displayName: String!
-  code: String!
+  roleId: Int!
+  role: Role!
 }
 
 """
@@ -15,18 +17,20 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
-type User {
+type Role {
   id: Int!
   createAt: DateTime!
   updateAt: DateTime!
-  email: String!
   displayName: String!
+  code: String!
+  users: [User!]
 }
 
 type Query {
   roles: [Role!]!
+  role(roleId: Int!): Role!
   users: [User!]!
-  user(id: Int!): User!
+  user(userId: Int!): User!
 }
 
 type Mutation {
@@ -44,10 +48,14 @@ input CreateRoleInput {
 input CreateUserInput {
   email: String!
   displayName: String!
+  password: String!
+  roleId: Int!
 }
 
 input UpdateUserInput {
   email: String
   displayName: String
+  password: String
+  roleId: Int
   id: Int!
 }
