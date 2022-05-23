@@ -4,10 +4,10 @@
 
 type Role {
   id: Int!
-  displayName: String!
-  code: String!
   createAt: DateTime!
   updateAt: DateTime!
+  displayName: String!
+  code: String!
 }
 
 """
@@ -17,6 +17,8 @@ scalar DateTime
 
 type User {
   id: Int!
+  createAt: DateTime!
+  updateAt: DateTime!
   email: String!
   displayName: String!
 }

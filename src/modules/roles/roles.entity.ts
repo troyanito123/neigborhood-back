@@ -1,19 +1,10 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql';
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Field, ObjectType } from '@nestjs/graphql';
+import { Column, Entity } from 'typeorm';
+import { GenericEntity } from '../generic-entity';
 
 @Entity({ name: 'roles' })
 @ObjectType()
-export class Role {
-  @PrimaryGeneratedColumn()
-  @Field((type) => Int)
-  id: number;
-
+export class Role extends GenericEntity {
   @Column()
   @Field()
   displayName: string;
@@ -21,12 +12,4 @@ export class Role {
   @Column({ unique: true })
   @Field()
   code: string;
-
-  @CreateDateColumn()
-  @Field()
-  createAt: Date;
-
-  @UpdateDateColumn()
-  @Field()
-  updateAt: Date;
 }
