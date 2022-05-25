@@ -26,6 +26,11 @@ type Role {
   users: [User!]
 }
 
+type LoginResponse {
+  accessToken: String!
+  user: User!
+}
+
 type Query {
   roles: [Role!]!
   role(roleId: Int!): Role!
@@ -38,6 +43,7 @@ type Mutation {
   createUser(createUserInput: CreateUserInput!): User!
   updateUser(updateUserInput: UpdateUserInput!): User!
   removeUser(id: Int!): User!
+  login(loginUserInput: LoginUserInput!): LoginResponse!
 }
 
 input CreateRoleInput {
@@ -58,4 +64,9 @@ input UpdateUserInput {
   password: String
   roleId: Int
   id: Int!
+}
+
+input LoginUserInput {
+  email: String!
+  password: String!
 }

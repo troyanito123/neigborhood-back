@@ -41,4 +41,8 @@ export class UsersService {
   getRole(roleId: number): Promise<Role> {
     return this.roleService.findOne(roleId);
   }
+
+  findByEmail(email: string) {
+    return this.userRepository.findOne({ where: { email } });
+  }
 }

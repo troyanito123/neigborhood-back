@@ -6,12 +6,15 @@ import {
   Int,
   Parent,
   ResolveField,
+  Context,
 } from '@nestjs/graphql';
 import { UsersService } from './users.service';
 import { User } from './entities/user.entity';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { Role } from '../roles/roles.entity';
+import { UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from '../auth/jwt-auth-guard';
 
 @Resolver(() => User)
 export class UsersResolver {
@@ -23,7 +26,9 @@ export class UsersResolver {
   }
 
   @Query(() => [User], { name: 'users' })
-  findAll() {
+  @UseGuards(JwtAuthGuard)
+  findAll(@Context() context) {
+    // console.log(context.req.user);
     return this.usersService.findAll();
   }
 
