@@ -1,10 +1,19 @@
 import { ValidationPipe } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { ConfigOptions } from './config/config';
+import generateTypeormConfigFile from './scripts/generate-typeormconfig';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.enableCors();
   app.useGlobalPipes(new ValidationPipe());
-  await app.listen(3000);
+
+  const configService = app.get(ConfigService);
+
+  generateTypeormConfigFile(configService);
+
+  await app.listen(configService.get(ConfigOptions.port));
 }
 bootstrap();

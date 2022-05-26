@@ -1,0 +1,22 @@
+{
+  "type": "postgres",
+  "ssl": false,
+  "host": "localhost",
+  "port": 5432,
+  "username": "admin",
+  "password": "admin",
+  "database": "NEIGHBORHOOD",
+  "entities": [
+    "C:\\Users\\jassm\\Documents\\practicas\\neighborhood-back\\dist\\**\\**\\*.entity{.ts,.js}"
+  ],
+  "autoLoadEntities": true,
+  "migrationsRun": false,
+  "migrations": [
+    "C:\\Users\\jassm\\Documents\\practicas\\neighborhood-back\\dist\\database\\migrations\\**\\*{.ts,.js}"
+  ],
+  "migrationsTableName": "custom_migration_table",
+  "cli": {
+    "migrationsDir": "src/database/migrations"
+  },
+  "synchronize": false
+}

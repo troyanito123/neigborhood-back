@@ -1,8 +1,8 @@
 {
-  "name": "delete-this-grafql",
+  "name": "neighborhood-dashboard",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "A complete dashboard for neighborhood administration",
+  "author": "Jassmanni Quiniones",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
@@ -18,11 +18,17 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+    "migration:generate": "npm run typeorm -- migration:generate -n",
+    "migration:run": "npm run typeorm -- migration:run",
+    "migration:revert": "npm run typeorm -- migration:revert",
+    "migration:dropdb": "npm run typeorm -- schema:drop"
   },
   "dependencies": {
     "@nestjs/apollo": "^10.0.12",
     "@nestjs/common": "^8.0.0",
+    "@nestjs/config": "^2.0.1",
     "@nestjs/core": "^8.0.0",
     "@nestjs/graphql": "^10.0.12",
     "@nestjs/jwt": "^8.0.1",
@@ -38,6 +44,7 @@
     "passport": "^0.5.3",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
+    "pg": "^8.7.3",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
