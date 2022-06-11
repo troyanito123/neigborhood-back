@@ -32,11 +32,27 @@ type LoginResponse {
   user: User!
 }
 
+type Profile {
+  id: Int!
+  createAt: DateTime!
+  updateAt: DateTime!
+  name: String
+  surname: String
+  identificationNumer: String
+  block: String
+  field: String
+  nus: String
+  userId: Int!
+  user: User!
+}
+
 type Query {
   roles: [Role!]!
   role(roleId: Int!): Role!
   users: [User!]!
   user(userId: Int!): User!
+  profiles: [Profile!]!
+  profile(userId: Int!): Profile!
 }
 
 type Mutation {
@@ -45,6 +61,8 @@ type Mutation {
   updateUser(updateUserInput: UpdateUserInput!): User!
   removeUser(id: Int!): User!
   login(loginUserInput: LoginUserInput!): LoginResponse!
+  createProfile(createProfileInput: CreateProfileInput!): Profile!
+  updateProfile(updateProfileInput: UpdateProfileInput!): Profile!
 }
 
 input CreateRoleInput {
@@ -69,4 +87,18 @@ input UpdateUserInput {
 input LoginUserInput {
   email: String!
   password: String!
+}
+
+input CreateProfileInput {
+  userId: Int!
+}
+
+input UpdateProfileInput {
+  id: Int!
+  name: String
+  surname: String
+  identificationNumer: String
+  block: String
+  field: String
+  nus: String
 }
