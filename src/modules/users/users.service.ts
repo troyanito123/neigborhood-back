@@ -9,6 +9,8 @@ import { UpdateUserInput } from './dto/update-user.input';
 import { User } from './entities/user.entity';
 
 import { hashSync } from 'bcrypt';
+import { RoleOptions } from '../auth/roles.decorator';
+import { GenericStaus } from '../generic-enums';
 
 @Injectable()
 export class UsersService {
@@ -16,9 +18,14 @@ export class UsersService {
     @InjectRepository(User) private userRepository: Repository<User>,
     private roleService: RolesService,
   ) {}
-  create(createUserInput: CreateUserInput) {
+  async create(createUserInput: CreateUserInput) {
     const newUser = this.userRepository.create(createUserInput);
     newUser.password = hashSync(createUserInput.password, 10);
+    if (!createUserInput.roleId) {
+      const role = await this.roleService.findOneByCode(RoleOptions.USER);
+      newUser.role = role;
+      newUser.roleId = role.id;
+    }
     return this.userRepository.save(newUser);
   }
 
@@ -30,12 +37,17 @@ export class UsersService {
     return this.userRepository.findOneOrFail(id);
   }
 
-  update(id: number, updateUserInput: UpdateUserInput) {
-    return `This action updates a #${id} user`;
+  async update(id: number, updateUserInput: UpdateUserInput) {
+    const user = await this.userRepository.findOne(id);
+    const { id: userId, ...rest } = updateUserInput;
+    this.userRepository.merge(user, rest);
+    return this.userRepository.save(user);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(id: number) {
+    const user = await this.userRepository.findOne(id);
+    user.status = GenericStaus.DELETED;
+    return this.userRepository.save(user);
   }
 
   getRole(roleId: number): Promise<Role> {
@@ -44,7 +56,7 @@ export class UsersService {
 
   findByEmail(email: string) {
     return this.userRepository.findOne({
-      where: { email },
+      where: { email, status: GenericStaus.ACTIVE },
       relations: ['role'],
     });
   }

@@ -3,6 +3,7 @@ import { GenericEntity } from 'src/modules/generic-entity';
 import { Role } from 'src/modules/roles/roles.entity';
 import { Column, Entity, ManyToOne } from 'typeorm';
 import { compareSync } from 'bcrypt';
+import { GenericStaus } from 'src/modules/generic-enums';
 
 @ObjectType()
 @Entity({ name: 'users' })
@@ -17,6 +18,10 @@ export class User extends GenericEntity {
 
   @Column()
   password: string;
+
+  @Column({ default: GenericStaus.ACTIVE, enum: GenericStaus })
+  @Field()
+  status: GenericStaus;
 
   @Column()
   @Field((type) => Int)

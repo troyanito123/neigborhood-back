@@ -8,6 +8,7 @@ type User {
   updateAt: DateTime!
   email: String!
   displayName: String!
+  status: String!
   roleId: Int!
   role: Role!
 }
@@ -55,15 +56,14 @@ input CreateUserInput {
   email: String!
   displayName: String!
   password: String!
-  roleId: Int!
+  roleId: Int
 }
 
 input UpdateUserInput {
-  email: String
-  displayName: String
-  password: String
-  roleId: Int
   id: Int!
+  displayName: String!
+  status: String!
+  roleId: Int!
 }
 
 input LoginUserInput {

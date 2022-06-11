@@ -1,8 +1,22 @@
-import { CreateUserInput } from './create-user.input';
-import { InputType, Field, Int, PartialType } from '@nestjs/graphql';
+import { InputType, Field, Int } from '@nestjs/graphql';
+import { IsEnum, IsNotEmpty } from 'class-validator';
+import { GenericStaus } from 'src/modules/generic-enums';
 
 @InputType()
-export class UpdateUserInput extends PartialType(CreateUserInput) {
-  @Field(() => Int)
+export class UpdateUserInput {
+  @IsNotEmpty()
+  @Field((type) => Int)
   id: number;
+
+  @IsNotEmpty()
+  @Field()
+  displayName: string;
+
+  @IsEnum(GenericStaus)
+  @Field()
+  status: GenericStaus;
+
+  @IsNotEmpty()
+  @Field((type) => Int)
+  roleId: number;
 }

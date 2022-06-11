@@ -21,4 +21,8 @@ export class RolesService {
   findOne(roleId: number): Promise<Role> {
     return this.roleRepository.findOneOrFail(roleId);
   }
+
+  async findOneByCode(code: string): Promise<Role> {
+    return this.roleRepository.findOne({ where: { code } });
+  }
 }
