@@ -46,6 +46,15 @@ type Profile {
   user: User!
 }
 
+type MonthlyCharge {
+  id: Int!
+  createAt: DateTime!
+  updateAt: DateTime!
+  amount: Int!
+  month: String!
+  year: String!
+}
+
 type Query {
   roles: [Role!]!
   role(roleId: Int!): Role!
@@ -53,6 +62,8 @@ type Query {
   user(userId: Int!): User!
   profiles: [Profile!]!
   profile(userId: Int!): Profile!
+  monthlyCharges: [MonthlyCharge!]!
+  monthlyCharge(id: Int!): MonthlyCharge!
 }
 
 type Mutation {
@@ -63,6 +74,8 @@ type Mutation {
   login(loginUserInput: LoginUserInput!): LoginResponse!
   createProfile(createProfileInput: CreateProfileInput!): Profile!
   updateProfile(updateProfileInput: UpdateProfileInput!): Profile!
+  createMonthlyCharge(createMonthlyChargeInput: CreateMonthlyChargeInput!): MonthlyCharge!
+  updateMonthlyCharge(updateMonthlyChargeInput: UpdateMonthlyChargeInput!): MonthlyCharge!
 }
 
 input CreateRoleInput {
@@ -101,4 +114,17 @@ input UpdateProfileInput {
   block: String
   field: String
   nus: String
+}
+
+input CreateMonthlyChargeInput {
+  amount: Int!
+  month: String!
+  year: String!
+}
+
+input UpdateMonthlyChargeInput {
+  id: Int!
+  amount: Int!
+  month: String!
+  year: String!
 }

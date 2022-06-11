@@ -15,6 +15,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ProfileModule } from './modules/profile/profile.module';
+import { MonthlyChargesModule } from './modules/monthly-charges/monthly-charges.module';
 @Module({
   imports: [
     GraphQLModule.forRoot<ApolloDriverConfig>({
@@ -32,6 +33,7 @@ import { ProfileModule } from './modules/profile/profile.module';
     UsersModule,
     AuthModule,
     ProfileModule,
+    MonthlyChargesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
