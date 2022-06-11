@@ -1,6 +1,7 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { GenericEntity } from 'src/modules/generic-entity';
-import { Column, Entity } from 'typeorm';
+import { MonthlyChargesPaid } from 'src/modules/monthly-charges-paid/entities/monthly-charges-paid.entity';
+import { Column, Entity, OneToMany } from 'typeorm';
 
 @Entity({ name: 'monthly_charges' })
 @ObjectType()
@@ -16,4 +17,9 @@ export class MonthlyCharge extends GenericEntity {
   @Column()
   @Field()
   year: string;
+
+  @OneToMany(() => MonthlyChargesPaid, (mcp) => mcp.monthlyCharge, {
+    cascade: true,
+  })
+  monthlyChargePaids: MonthlyChargesPaid[];
 }

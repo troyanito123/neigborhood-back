@@ -2,6 +2,33 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type MonthlyCharge {
+  id: Int!
+  createAt: DateTime!
+  updateAt: DateTime!
+  amount: Int!
+  month: String!
+  year: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type MonthlyChargesPaid {
+  id: Int!
+  createAt: DateTime!
+  updateAt: DateTime!
+  date: DateTime!
+  amount: Float!
+  status: String!
+  userId: Int!
+  monthlyChargeId: Int!
+  user: User!
+  monthlyCharge: MonthlyCharge!
+}
+
 type User {
   id: Int!
   createAt: DateTime!
@@ -12,11 +39,6 @@ type User {
   roleId: Int!
   role: Role!
 }
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
 
 type Role {
   id: Int!
@@ -46,15 +68,6 @@ type Profile {
   user: User!
 }
 
-type MonthlyCharge {
-  id: Int!
-  createAt: DateTime!
-  updateAt: DateTime!
-  amount: Int!
-  month: String!
-  year: String!
-}
-
 type Query {
   roles: [Role!]!
   role(roleId: Int!): Role!
@@ -64,6 +77,9 @@ type Query {
   profile(userId: Int!): Profile!
   monthlyCharges: [MonthlyCharge!]!
   monthlyCharge(id: Int!): MonthlyCharge!
+  monthlyChargesPaids: [MonthlyChargesPaid!]!
+  monthlyChargesPaid(id: Int!): MonthlyChargesPaid!
+  monthlyChargesPaidByUser(userId: Int!): [MonthlyChargesPaid!]!
 }
 
 type Mutation {
@@ -76,6 +92,8 @@ type Mutation {
   updateProfile(updateProfileInput: UpdateProfileInput!): Profile!
   createMonthlyCharge(createMonthlyChargeInput: CreateMonthlyChargeInput!): MonthlyCharge!
   updateMonthlyCharge(updateMonthlyChargeInput: UpdateMonthlyChargeInput!): MonthlyCharge!
+  createMonthlyChargesPaid(createMonthlyChargesPaidInput: CreateMonthlyChargesPaidInput!): MonthlyChargesPaid!
+  removeMonthlyChargesPaid(id: Int!): MonthlyChargesPaid!
 }
 
 input CreateRoleInput {
@@ -127,4 +145,11 @@ input UpdateMonthlyChargeInput {
   amount: Int!
   month: String!
   year: String!
+}
+
+input CreateMonthlyChargesPaidInput {
+  date: DateTime!
+  amount: Float!
+  userId: Float!
+  monthlyChargeId: Float!
 }

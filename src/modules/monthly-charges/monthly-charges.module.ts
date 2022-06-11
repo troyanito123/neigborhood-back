@@ -6,6 +6,7 @@ import { MonthlyCharge } from './entities/monthly-charge.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([MonthlyCharge])],
+  exports: [MonthlyChargesService],
   providers: [MonthlyChargesResolver, MonthlyChargesService],
 })
 export class MonthlyChargesModule {}
