@@ -91,6 +91,18 @@ type Profile {
   user: User!
 }
 
+type Meeting {
+  id: Int!
+  createAt: DateTime!
+  updateAt: DateTime!
+  name: String!
+  description: String!
+  date: DateTime!
+  conclutions: String
+  fine: Int!
+  status: String!
+}
+
 type Query {
   roles: [Role!]!
   role(roleId: Int!): Role!
@@ -108,6 +120,8 @@ type Query {
   contributionsPaid: [ContributionsPaid!]!
   contributionsPaidByUser(userId: Int!): [ContributionsPaid!]!
   contributionPaid(id: Int!): ContributionsPaid!
+  meetings: [Meeting!]!
+  meeting(id: Int!): Meeting!
 }
 
 type Mutation {
@@ -127,6 +141,9 @@ type Mutation {
   createContributionsPaid(createContributionsPaidInput: CreateContributionsPaidInput!): ContributionsPaid!
   updateContributionsPaid(updateContributionsPaidInput: UpdateContributionsPaidInput!): ContributionsPaid!
   removeContributionsPaid(id: Int!): ContributionsPaid!
+  createMeeting(createMeetingInput: CreateMeetingInput!): Meeting!
+  updateMeeting(updateMeetingInput: UpdateMeetingInput!): Meeting!
+  removeMeeting(id: Int!): Meeting!
 }
 
 input CreateRoleInput {
@@ -211,5 +228,22 @@ input CreateContributionsPaidInput {
 
 input UpdateContributionsPaidInput {
   id: Int!
+  status: String!
+}
+
+input CreateMeetingInput {
+  name: String!
+  description: String!
+  date: DateTime!
+  fine: Int!
+}
+
+input UpdateMeetingInput {
+  id: Int!
+  name: String!
+  description: String!
+  date: DateTime!
+  fine: Int!
+  conclutions: String
   status: String!
 }
