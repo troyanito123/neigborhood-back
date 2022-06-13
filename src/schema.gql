@@ -68,6 +68,16 @@ type Profile {
   user: User!
 }
 
+type Contribution {
+  id: Int!
+  createAt: DateTime!
+  updateAt: DateTime!
+  name: String!
+  description: String!
+  amount: Int!
+  special: Boolean!
+}
+
 type Query {
   roles: [Role!]!
   role(roleId: Int!): Role!
@@ -80,6 +90,8 @@ type Query {
   monthlyChargesPaids: [MonthlyChargesPaid!]!
   monthlyChargesPaid(id: Int!): MonthlyChargesPaid!
   monthlyChargesPaidByUser(userId: Int!): [MonthlyChargesPaid!]!
+  contributions: [Contribution!]!
+  contribution(id: Int!): Contribution!
 }
 
 type Mutation {
@@ -94,6 +106,8 @@ type Mutation {
   updateMonthlyCharge(updateMonthlyChargeInput: UpdateMonthlyChargeInput!): MonthlyCharge!
   createMonthlyChargesPaid(createMonthlyChargesPaidInput: CreateMonthlyChargesPaidInput!): MonthlyChargesPaid!
   removeMonthlyChargesPaid(id: Int!): MonthlyChargesPaid!
+  createContribution(createContributionInput: CreateContributionInput!): Contribution!
+  updateContribution(updateContributionInput: UpdateContributionInput!): Contribution!
 }
 
 input CreateRoleInput {
@@ -152,4 +166,19 @@ input CreateMonthlyChargesPaidInput {
   amount: Float!
   userId: Float!
   monthlyChargeId: Float!
+}
+
+input CreateContributionInput {
+  name: String!
+  description: String!
+  amount: Int!
+  special: Boolean
+}
+
+input UpdateContributionInput {
+  id: Int!
+  name: String!
+  description: String!
+  amount: Int!
+  special: Boolean
 }
