@@ -6,6 +6,7 @@ import { Contribution } from './entities/contribution.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Contribution])],
+  exports: [ContributionsService],
   providers: [ContributionsResolver, ContributionsService],
 })
 export class ContributionsModule {}

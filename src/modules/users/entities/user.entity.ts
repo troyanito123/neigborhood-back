@@ -5,6 +5,7 @@ import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 import { compareSync } from 'bcrypt';
 import { GenericStaus } from 'src/modules/generic-enums';
 import { MonthlyChargesPaid } from 'src/modules/monthly-charges-paid/entities/monthly-charges-paid.entity';
+import { ContributionsPaid } from 'src/modules/contributions-paid/entities/contributions-paid.entity';
 
 @ObjectType()
 @Entity({ name: 'users' })
@@ -34,6 +35,9 @@ export class User extends GenericEntity {
 
   @OneToMany(() => MonthlyChargesPaid, (mcp) => mcp.user, { cascade: true })
   monthlyChargePaids: MonthlyChargesPaid[];
+
+  @OneToMany(() => ContributionsPaid, (cp) => cp.user, { cascade: true })
+  contributionsPaid: ContributionsPaid[];
 
   authenticate(password: string) {
     return compareSync(password, this.password);

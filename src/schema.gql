@@ -29,6 +29,29 @@ type MonthlyChargesPaid {
   monthlyCharge: MonthlyCharge!
 }
 
+type Contribution {
+  id: Int!
+  createAt: DateTime!
+  updateAt: DateTime!
+  name: String!
+  description: String!
+  amount: Int!
+  special: Boolean!
+}
+
+type ContributionsPaid {
+  id: Int!
+  createAt: DateTime!
+  updateAt: DateTime!
+  date: DateTime!
+  amount: Int!
+  status: String!
+  userId: Int!
+  contributionId: Int!
+  user: User!
+  contribution: Contribution!
+}
+
 type User {
   id: Int!
   createAt: DateTime!
@@ -68,16 +91,6 @@ type Profile {
   user: User!
 }
 
-type Contribution {
-  id: Int!
-  createAt: DateTime!
-  updateAt: DateTime!
-  name: String!
-  description: String!
-  amount: Int!
-  special: Boolean!
-}
-
 type Query {
   roles: [Role!]!
   role(roleId: Int!): Role!
@@ -92,6 +105,9 @@ type Query {
   monthlyChargesPaidByUser(userId: Int!): [MonthlyChargesPaid!]!
   contributions: [Contribution!]!
   contribution(id: Int!): Contribution!
+  contributionsPaid: [ContributionsPaid!]!
+  contributionsPaidByUser(userId: Int!): [ContributionsPaid!]!
+  contributionPaid(id: Int!): ContributionsPaid!
 }
 
 type Mutation {
@@ -108,6 +124,9 @@ type Mutation {
   removeMonthlyChargesPaid(id: Int!): MonthlyChargesPaid!
   createContribution(createContributionInput: CreateContributionInput!): Contribution!
   updateContribution(updateContributionInput: UpdateContributionInput!): Contribution!
+  createContributionsPaid(createContributionsPaidInput: CreateContributionsPaidInput!): ContributionsPaid!
+  updateContributionsPaid(updateContributionsPaidInput: UpdateContributionsPaidInput!): ContributionsPaid!
+  removeContributionsPaid(id: Int!): ContributionsPaid!
 }
 
 input CreateRoleInput {
@@ -181,4 +200,16 @@ input UpdateContributionInput {
   description: String!
   amount: Int!
   special: Boolean
+}
+
+input CreateContributionsPaidInput {
+  amount: Int!
+  userId: Int!
+  contributionId: Int!
+  date: DateTime!
+}
+
+input UpdateContributionsPaidInput {
+  id: Int!
+  status: String!
 }
