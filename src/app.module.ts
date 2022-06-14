@@ -20,6 +20,7 @@ import { MonthlyChargesPaidModule } from './modules/monthly-charges-paid/monthly
 import { ContributionsModule } from './modules/contributions/contributions.module';
 import { ContributionsPaidModule } from './modules/contributions-paid/contributions-paid.module';
 import { MeetingModule } from './modules/meeting/meeting.module';
+import { AttendanceModule } from './modules/attendance/attendance.module';
 @Module({
   imports: [
     GraphQLModule.forRoot<ApolloDriverConfig>({
@@ -42,6 +43,7 @@ import { MeetingModule } from './modules/meeting/meeting.module';
     ContributionsModule,
     ContributionsPaidModule,
     MeetingModule,
+    AttendanceModule,
   ],
   controllers: [AppController],
   providers: [AppService],
